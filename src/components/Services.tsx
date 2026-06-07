@@ -40,7 +40,7 @@ export default function Services() {
 
   return (
     <section id="services" className="mx-auto max-w-[1760px] px-6 pt-16 md:px-10 md:pt-24">
-      {/* Header */}
+      
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
         <div>
           <h2 className="text-4xl leading-[1.04] tracking-tight md:text-5xl">
