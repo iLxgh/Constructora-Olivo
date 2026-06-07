@@ -11,10 +11,10 @@ export default function WhyChooseUs() {
       <div className="grid grid-cols-1 gap-12 md:grid-cols-2 md:gap-16">
         <div className="flex flex-col justify-between gap-12">
           <div>
-            <h2 className="text-4xl tracking-tight md:text-6xl">
+            <h2 className="text-4xl leading-[1.04] tracking-tight md:text-6xl">
               Why Choose Us?
             </h2>
-            <p className="mt-5 max-w-md text-base leading-relaxed text-foreground/50">
+            <p className="mt-5 max-w-md text-base leading-4.5 text-foreground/50">
               Class aptent taciti sociosqu ad litora torquent per conubia
               nostra, per inceptos himenaeos. Mauris aliquam, augue vitae
               imperdiet ultrices, quam nulla pretium ipsum.
@@ -34,7 +34,7 @@ export default function WhyChooseUs() {
               <span className="text-5xl tracking-tight md:text-6xl">
                 {s.value}
               </span>
-              <p className="mt-3 max-w-[200px] text-sm leading-relaxed text-foreground/50">
+              <p className="mt-3 max-w-[200px] text-base leading-4.5 text-foreground/50">
                 {s.caption}
               </p>
             </div>

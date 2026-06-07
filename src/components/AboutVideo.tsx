@@ -21,14 +21,14 @@ export default function AboutVideo() {
 
       {/* Texto superior */}
       <div className="absolute left-1/2 top-8 -translate-x-1/2">
-        <span className="rounded-full bg-black/40 px-7 py-3 text-sm text-white backdrop-blur-md">
+        <span className="rounded-full bg-black/40 px-7 py-3 text-base text-white backdrop-blur-md">
           What is OLIVO?
         </span>
       </div>
 
       {/* Recuadro inferior derecho, esquinado pero no pegado al borde */}
       <div className="absolute bottom-10 right-10 max-w-sm md:bottom-14 md:right-14">
-        <p className="rounded-lg bg-black/40 p-5 text-sm leading-relaxed text-white/90 backdrop-blur-md">
+        <p className="rounded-lg bg-black/40 p-5 text-base leading-4.5 text-white/90 backdrop-blur-md">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nec
           ex eget quam molestie finibus ut faucibus sapien. Aenean ac ligula
           commodo tellus dapibus iaculis. Aenean porta hendrerit tellus.

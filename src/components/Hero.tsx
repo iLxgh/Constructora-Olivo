@@ -8,11 +8,11 @@ export default function Hero() {
           Guiding your path to a new home in Indonesia
         </h1>
 
-        <div className="flex flex-col items-start gap-6 md:items-end md:text-right">
-          <p className="text-xs uppercase tracking-wider text-foreground/70">
-            ©2026 Olivo Residence&nbsp;&nbsp;All Right Reserved
+        <div className="flex flex-col items-start gap-16 md:items-end md:text-right">
+          <p className="text-2xl uppercase text-black leading-6.5">
+            ©2026 Olivo Residence&nbsp;&nbsp; <br/> All Right Reserved
           </p>
-          <p className="max-w-sm text-sm leading-relaxed text-foreground/50">
+          <p className="max-w-sm text-base leading-4.5 text-foreground/50">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
             nec ex eget quam molestie finibus ut faucibus sapien.
           </p>

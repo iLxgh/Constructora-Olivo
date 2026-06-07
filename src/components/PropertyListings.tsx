@@ -29,10 +29,10 @@ export default function PropertyListings() {
       className="mx-auto max-w-[1760px] px-6 py-16 md:px-10 md:py-24"
     >
       <div className="flex flex-col items-center text-center">
-        <h2 className="text-4xl tracking-tight md:text-5xl">
+        <h2 className="text-4xl leading-[1.04] tracking-tight md:text-5xl">
           Explore Our Property Listings
         </h2>
-        <p className="mt-4 max-w-md text-sm text-foreground/50">
+        <p className="mt-4 max-w-md text-base leading-4.5 text-foreground/50">
           Mauris porttitor vestibulum arcu, sit amet ornare felis. Nulla
           hendrerit maximus risus.
         </p>
@@ -43,7 +43,7 @@ export default function PropertyListings() {
 
       <div
         ref={trackRef}
-        className="mt-12 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        className="mt-12 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-2 scrollbar-none [&::-webkit-scrollbar]:hidden"
       >
         {listings.map((item) => (
           <Link
@@ -69,8 +69,8 @@ export default function PropertyListings() {
               </div>
             </div>
             <div className="mt-5 flex items-center justify-between gap-4">
-              <h3 className="text-xl">{item.title}</h3>
-              <p className="inline-flex items-center gap-1 text-sm text-foreground/50">
+              <h3 className="text-2xl leading-6.5">{item.title}</h3>
+              <p className="inline-flex items-center gap-1 text-base text-foreground/50">
                 <PinIcon className="h-4 w-4" /> {item.location}
               </p>
             </div>

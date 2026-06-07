@@ -27,16 +27,16 @@ export default function Footer() {
       <div className="mx-auto max-w-[1760px] px-6 md:px-10">
         <div className="mt-16 grid grid-cols-1 gap-12 pb-10 md:grid-cols-2">
           <div>
-            <h3 className="text-base text-foreground/60">Proin ut efficitur turpis</h3>
-            <p className="mt-6 max-w-sm text-sm leading-relaxed text-foreground/50">
+            <h3 className="text-2xl leading-6.5 text-foreground/60">Proin ut efficitur turpis</h3>
+            <p className="mt-6 max-w-sm text-base leading-4.5 text-foreground/50">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam augue
               eros, rutrum vel erat sed, interdum accumsan sapien. Sed at
               malesuada lacus.
             </p>
           </div>
           <div>
-            <h3 className="text-base text-foreground/60">Nam ligula purus</h3>
-            <p className="mt-6 max-w-sm text-sm leading-relaxed text-foreground/50">
+            <h3 className="text-2xl leading-6.5 text-foreground/60">Nam ligula purus</h3>
+            <p className="mt-6 max-w-sm text-base leading-4.5 text-foreground/50">
               Donec a purus suscipit, pretium sem eu, imperdiet felis. In hac
               habitasse platea dictumst.
             </p>

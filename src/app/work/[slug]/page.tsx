@@ -52,11 +52,11 @@ export default async function WorkDetailPage({
             >
               ← All Work
             </Link>
-            <h1 className="mt-4 text-4xl tracking-tight md:text-6xl">
+            <h1 className="mt-4 text-4xl leading-[1.04] tracking-tight md:text-6xl">
               {work.title}
             </h1>
           </div>
-          <p className="text-xs uppercase tracking-wider text-foreground/70 md:text-right">
+          <p className="text-2xl uppercase text-black leading-6.5 md:text-right">
             ©2026 Olivo Residence&nbsp;&nbsp;All Right Reserved
           </p>
         </div>
@@ -70,7 +70,7 @@ export default async function WorkDetailPage({
         </div>
 
         {/* Hero image */}
-        <div className="relative mt-8 aspect-[16/8] w-full overflow-hidden rounded-sm">
+        <div className="relative mt-8 aspect-16/8 w-full overflow-hidden rounded-sm">
           <Image
             src={work.image}
             alt={work.title}
@@ -84,7 +84,7 @@ export default async function WorkDetailPage({
         <div className="grid grid-cols-1 gap-8 py-16 md:grid-cols-[1fr_1.5fr] md:gap-16 md:py-24">
           <Eyebrow>Project Details</Eyebrow>
           <div>
-            <p className="text-lg leading-relaxed text-foreground/70 md:text-xl">
+            <p className="text-base leading-4.5 text-foreground/70">
               Class aptent taciti sociosqu ad litora torquent per conubia nostra,
               per inceptos himenaeos. Mauris aliquam, augue vitae imperdiet
               ultrices, quam nulla pretium ipsum.
@@ -114,7 +114,7 @@ export default async function WorkDetailPage({
               className="object-cover"
             />
           </div>
-          <div className="relative aspect-[16/10] overflow-hidden rounded-sm">
+          <div className="relative aspect-16/10 overflow-hidden rounded-sm">
             <Image
               src="/assets/house-6.png"
               alt={`${work.title} detail`}
@@ -134,7 +134,7 @@ export default async function WorkDetailPage({
         {/* About the project */}
         <div className="grid grid-cols-1 gap-8 pb-16 md:grid-cols-[1fr_1.5fr] md:gap-16">
           <Eyebrow>About the Project</Eyebrow>
-          <p className="text-base leading-relaxed text-foreground/60">
+          <p className="text-base leading-4.5 text-foreground/60">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam augue
             eros, rutrum vel erat sed, interdum accumsan sapien. Sed at malesuada
             lacus. Donec a purus suscipit, pretium sem eu, imperdiet felis. In
@@ -144,7 +144,7 @@ export default async function WorkDetailPage({
         </div>
 
         {/* Wide closing image */}
-        <div className="relative mb-8 aspect-[16/9] w-full overflow-hidden rounded-sm">
+        <div className="relative mb-8 aspect-video w-full overflow-hidden rounded-sm">
           <Image
             src="/assets/house-2.png"
             alt={`${work.title} exterior`}

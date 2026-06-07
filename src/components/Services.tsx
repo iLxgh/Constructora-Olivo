@@ -13,14 +13,14 @@ export default function Services() {
     <section id="services" className="mx-auto max-w-[1760px] px-6 py-16 md:px-10 md:py-24">
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
         <div>
-          <h2 className="text-4xl tracking-tight md:text-5xl">
+          <h2 className="text-4xl leading-[1.04] tracking-tight md:text-5xl">
             Discover Our Services
           </h2>
-          <p className="mt-4 text-sm text-foreground/50">
+          <p className="mt-4 text-base leading-4.5 text-foreground/50">
             Mauris porttitor vestibulum arcu, sit amet ornare felis.
           </p>
         </div>
-        <p className="text-sm leading-relaxed text-foreground/60 md:pt-1">
+        <p className="text-base leading-4.5 text-foreground/60 md:pt-1">
           Class aptent taciti sociosqu ad litora torquent per conubia nostra,
           per inceptos himenaeos. Aliquam, augue vitae imperdiet ultricies, quam
           nulla pretium ipsum.
@@ -56,12 +56,12 @@ export default function Services() {
               className="object-cover"
             />
           </div>
-          <p className="mt-5 text-sm leading-relaxed text-foreground/60">
+          <p className="mt-5 text-base leading-4.5 text-foreground/60">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam augue
             eros, rutrum vel erat sed, interdum accumsan sapien. Sed at malesuada
             lacus.
           </p>
-          <p className="mt-4 text-sm leading-relaxed text-foreground/60">
+          <p className="mt-4 text-base leading-4.5 text-foreground/60">
             Nunc blandit magna vitae tempus mattis. Pellentesque arcu ante.
           </p>
         </div>

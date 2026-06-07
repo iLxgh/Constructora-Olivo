@@ -28,7 +28,7 @@ export default function WorkCard({ work, cols }: WorkCardProps) {
         />
       </div>
       <div className="mt-3 flex items-center justify-between gap-4">
-        <h3 className="text-sm md:text-base">{work.title}</h3>
+        <h3 className="text-base">{work.title}</h3>
         <div className="flex items-center gap-6 text-sm text-foreground/50">
           <span>{work.category}</span>
           <span>{work.year}</span>

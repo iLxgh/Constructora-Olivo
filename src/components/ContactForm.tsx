@@ -17,7 +17,7 @@ export default function ContactForm() {
       </div>
 
       <div className="flex flex-col justify-center bg-[#1e1e1b] p-8 text-background md:p-16">
-        <h2 className="text-3xl leading-tight tracking-tight md:text-5xl">
+        <h2 className="text-4xl leading-[1.04] tracking-tight md:text-5xl">
           Still haven&apos;t found what you&apos;re looking for?
         </h2>
 

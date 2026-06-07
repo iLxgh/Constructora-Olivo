@@ -12,7 +12,7 @@ export default function Navbar() {
   return (
     <header className="w-full">
       <nav className="mx-auto flex max-w-[1760px] items-center justify-between gap-6 px-6 py-6 md:px-10 md:py-8">
-        <ul className="hidden items-center gap-7 text-sm md:flex">
+        <ul className="hidden items-center gap-7 text-base md:flex">
           {navLinks.map(({ label, href }, i) => (
             <li key={label}>
               <Link
@@ -33,7 +33,7 @@ export default function Navbar() {
           OLIVO
         </Link>
 
-        <div className="hidden items-center gap-7 text-sm md:flex">
+        <div className="hidden items-center gap-7 text-base md:flex">
           <Link href="/#contact" className="transition-colors hover:text-foreground/60">
             Contact Us
           </Link>
