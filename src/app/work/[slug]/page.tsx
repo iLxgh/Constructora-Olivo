@@ -4,10 +4,10 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { getWork, works } from "@/lib/works";
+import { getProject, projects } from "@/lib/projects";
 
 export function generateStaticParams() {
-  return works.map((w) => ({ slug: w.slug }));
+  return projects.map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({
@@ -16,18 +16,11 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const work = getWork(slug);
+  const project = getProject(slug);
   return {
-    title: work ? `${work.title} — OLIVO Residence` : "OLIVO Residence",
+    title: project ? `${project.title} — OLIVO Residence` : "OLIVO Residence",
   };
 }
-
-const specs = [
-  { label: "Country", value: "Worcester, Manufacturing" },
-  { label: "Collaboration", value: "Refshcusman (Architecture)" },
-  { label: "Residences", value: "22" },
-  { label: "Discipline", value: "Interior Design & Delivery" },
-];
 
 export default async function WorkDetailPage({
   params,
@@ -35,8 +28,8 @@ export default async function WorkDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const work = getWork(slug);
-  if (!work) notFound();
+  const project = getProject(slug);
+  if (!project) notFound();
 
   return (
     <main className="min-h-screen">
@@ -53,7 +46,7 @@ export default async function WorkDetailPage({
               ← All Work
             </Link>
             <h1 className="mt-4 text-4xl leading-[1.04] tracking-tight md:text-6xl">
-              {work.title}
+              {project.title}
             </h1>
           </div>
           <p className="text-2xl uppercase text-black leading-6.5 md:text-right">
@@ -63,17 +56,17 @@ export default async function WorkDetailPage({
 
         {/* Meta bar */}
         <div className="grid grid-cols-2 gap-6 border-y border-foreground/15 py-6 text-sm md:grid-cols-4">
-          <Meta label="Discipline" value={work.category} />
-          <Meta label="Year" value={work.year} />
-          <Meta label="Status" value="Complete" />
-          <Meta label="Location" value="Veracruz, MX" />
+          <Meta label="Discipline" value={project.category} />
+          <Meta label="Year" value={project.year} />
+          <Meta label="Status" value={project.status} />
+          <Meta label="Location" value={project.location} />
         </div>
 
         {/* Hero image */}
         <div className="relative mt-8 aspect-16/8 w-full overflow-hidden rounded-sm">
           <Image
-            src={work.image}
-            alt={work.title}
+            src={project.heroImage}
+            alt={project.title}
             fill
             className="object-cover"
             priority
@@ -85,13 +78,11 @@ export default async function WorkDetailPage({
           <Eyebrow>Project Details</Eyebrow>
           <div>
             <p className="text-base leading-4.5 text-foreground/70">
-              Class aptent taciti sociosqu ad litora torquent per conubia nostra,
-              per inceptos himenaeos. Mauris aliquam, augue vitae imperdiet
-              ultrices, quam nulla pretium ipsum.
+              {project.description}
             </p>
 
             <dl className="mt-10 flex flex-col">
-              {specs.map((s) => (
+              {project.specs.map((s) => (
                 <div
                   key={s.label}
                   className="flex items-center justify-between border-t border-foreground/15 py-4 text-sm"
@@ -108,16 +99,16 @@ export default async function WorkDetailPage({
         <div className="grid grid-cols-1 gap-4 md:grid-cols-[1fr_1.6fr] md:gap-6">
           <div className="relative aspect-square overflow-hidden rounded-sm">
             <Image
-              src="/assets/house-1.png"
-              alt={`${work.title} detail`}
+              src={project.galleryImages[0]}
+              alt={`${project.title} detail`}
               fill
               className="object-cover"
             />
           </div>
           <div className="relative aspect-16/10 overflow-hidden rounded-sm">
             <Image
-              src="/assets/house-6.png"
-              alt={`${work.title} detail`}
+              src={project.galleryImages[1]}
+              alt={`${project.title} detail`}
               fill
               className="object-cover"
             />
@@ -125,29 +116,25 @@ export default async function WorkDetailPage({
         </div>
 
         {/* Pull quote */}
-        <blockquote className="py-16 md:py-28">
-          <p className="max-w-4xl text-3xl leading-tight tracking-tight md:text-5xl">
-            &ldquo;Ensuring the original design was improved upon.&rdquo;
-          </p>
-        </blockquote>
+        {project.quote && (
+          <blockquote className="py-16 md:py-28">
+            <p className="max-w-4xl text-3xl leading-tight tracking-tight md:text-5xl">
+              &ldquo;{project.quote}&rdquo;
+            </p>
+          </blockquote>
+        )}
 
         {/* About the project */}
         <div className="grid grid-cols-1 gap-8 pb-16 md:grid-cols-[1fr_1.5fr] md:gap-16">
           <Eyebrow>About the Project</Eyebrow>
-          <p className="text-base leading-4.5 text-foreground/60">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam augue
-            eros, rutrum vel erat sed, interdum accumsan sapien. Sed at malesuada
-            lacus. Donec a purus suscipit, pretium sem eu, imperdiet felis. In
-            hac habitasse platea dictumst. Nunc blandit magna vitae tempus
-            mattis.
-          </p>
+          <p className="text-base leading-4.5 text-foreground/60">{project.about}</p>
         </div>
 
         {/* Wide closing image */}
         <div className="relative mb-8 aspect-video w-full overflow-hidden rounded-sm">
           <Image
-            src="/assets/house-2.png"
-            alt={`${work.title} exterior`}
+            src={project.galleryImages[2]}
+            alt={`${project.title} exterior`}
             fill
             className="object-cover"
           />
