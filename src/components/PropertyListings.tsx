@@ -108,7 +108,7 @@ export default function PropertyListings() {
               key={`${item.slug}-${i}`}
               href={`/work/${item.slug}`}
               className={`group block shrink-0 snap-center basis-[85%] origin-center transition-transform duration-500 ease-in-out sm:basis-[65%] lg:basis-[55%] ${
-                isActive ? "scale-100" : "scale-[0.88]"
+                isActive ? "scale-100" : "scale-[0.78]"
               }`}
             >
               <div className="relative h-[400px] overflow-hidden rounded-sm md:h-[500px]">
