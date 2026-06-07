@@ -57,7 +57,7 @@ export default function Services() {
         </p>
       </div>
 
-      {/* Content */}
+    
       <div className="mt-12 grid grid-cols-1 gap-10 md:grid-cols-2 md:items-center">
         {/* Left: service list */}
         <ul className="flex flex-col gap-3">
