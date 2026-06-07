@@ -27,26 +27,27 @@ export default function Footer() {
       <div className="mx-auto max-w-[1760px] px-6 md:px-10">
         <div className="mt-16 grid grid-cols-1 gap-12 pb-10 md:grid-cols-2">
           <div>
-            <h3 className="text-2xl leading-6.5 text-foreground/60">Proin ut efficitur turpis</h3>
+            <h3 className="text-2xl leading-6.5 text-foreground/60">Building Veracruz</h3>
             <p className="mt-6 max-w-sm text-base leading-4.5 text-foreground/50">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam augue
-              eros, rutrum vel erat sed, interdum accumsan sapien. Sed at
-              malesuada lacus.
+              For over a decade, OLIVO has shaped the built environment across
+              Mexico — homes, schools, roads, and commercial spaces. Every
+              structure we raise reflects our craft.
             </p>
           </div>
           <div>
-            <h3 className="text-2xl leading-6.5 text-foreground/60">Nam ligula purus</h3>
+            <h3 className="text-2xl leading-6.5 text-foreground/60">Get in Touch</h3>
             <p className="mt-6 max-w-sm text-base leading-4.5 text-foreground/50">
-              Donec a purus suscipit, pretium sem eu, imperdiet felis. In hac
-              habitasse platea dictumst.
+              Veracruz, México<br />
+              hola@constructoraolivo.com<br />
+              +52 (229) 000 0000
             </p>
           </div>
         </div>
 
         <div className="flex flex-col gap-4 border-t border-foreground/15 pt-6 text-sm text-foreground/50 sm:flex-row sm:items-center sm:justify-between">
-          <span>Nam ligula purus</span>
-          <span>Duis urna purus</span>
-          <span>Etiam sed augue</span>
+          <span>© 2026 OLIVO Constructora</span>
+          <span>Veracruz, México</span>
+          <span>All Rights Reserved</span>
         </div>
       </div>
     </footer>

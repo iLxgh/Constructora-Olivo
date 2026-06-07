@@ -5,10 +5,10 @@ import { useEffect, useRef, useState } from "react";
 type Stat = { prefix: string; target: number; suffix: string; caption: string };
 
 const stats: Stat[] = [
-  { prefix: "+", target: 25, suffix: "",  caption: "Mauris porttitor vestibulum arcu, sit amet ornare felis." },
-  { prefix: "",  target: 500, suffix: "+", caption: "Sed tincidunt posuere sem, nec tincidunt massa tincidunt" },
-  { prefix: "",  target: 98,  suffix: "%", caption: "Proin ut efficitur turpis, quis pretium risus." },
-  { prefix: "",  target: 15,  suffix: "+", caption: "Nunc blandit magna vitae tempus mattis. Pellentesque arcu ante" },
+  { prefix: "+", target: 25, suffix: "",  caption: "Landmark projects completed on time and on budget." },
+  { prefix: "",  target: 500, suffix: "+", caption: "Skilled workers and specialists in our trusted network." },
+  { prefix: "",  target: 98,  suffix: "%", caption: "Client satisfaction rate across all completed projects." },
+  { prefix: "",  target: 15,  suffix: "+", caption: "Public and institutional contracts awarded to date." },
 ];
 
 const DURATION = 2400; // ms — todas las animaciones duran lo mismo
@@ -83,9 +83,9 @@ export default function WhyChooseUs() {
               Why Choose Us?
             </h2>
             <p className="mt-5 max-w-md text-base leading-4.5 text-foreground/50">
-              Class aptent taciti sociosqu ad litora torquent per conubia
-              nostra, per inceptos himenaeos. Mauris aliquam, augue vitae
-              imperdiet ultrices, quam nulla pretium ipsum.
+              A decade of results, not just promises. From private residences
+              to public infrastructure — every project we deliver carries the
+              same commitment to quality, precision, and accountability.
             </p>
           </div>
 

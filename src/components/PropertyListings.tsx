@@ -84,11 +84,11 @@ export default function PropertyListings() {
       <div className="mx-auto max-w-[1760px] px-6 md:px-10">
         <div className="flex flex-col items-center text-center">
           <h2 className="text-4xl leading-[1.04] tracking-tight md:text-5xl">
-            Explore Our Property Listings
+            Our Featured Projects
           </h2>
           <p className="mt-4 max-w-md text-base leading-4.5 text-foreground/50">
-            Mauris porttitor vestibulum arcu, sit amet ornare felis. Nulla
-            hendrerit maximus risus.
+            A selection from our portfolio — each project a benchmark of
+            precision, craftsmanship, and lasting design.
           </p>
           <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-foreground/20 px-4 py-2 text-sm">
             <PinIcon className="h-4 w-4" /> Mexico, Veracruz

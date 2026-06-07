@@ -87,9 +87,10 @@ export default function AboutVideo() {
       {/* Texto inferior derecho */}
       <div className="absolute bottom-10 right-10 max-w-sm md:bottom-14 md:right-14">
         <p className="rounded-lg bg-black/40 p-5 text-base leading-4.5 text-white/90 backdrop-blur-md">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nec
-          ex eget quam molestie finibus ut faucibus sapien. Aenean ac ligula
-          commodo tellus dapibus iaculis. Aenean porta hendrerit tellus.
+          For over a decade, OLIVO has shaped communities across Veracruz —
+          schools, roads, homes, and commercial spaces — each project built with
+          the same uncompromising standard. We don&apos;t just raise structures.
+          We build what endures.
         </p>
       </div>
     </section>

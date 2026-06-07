@@ -7,31 +7,31 @@ import { Chevron } from "./icons";
 const services = [
   {
     n: "01",
-    title: "Maecenas at ex risus",
+    title: "Residential Construction",
     image: "/assets/house-1.png",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam augue eros, rutrum vel erat sed, interdum accumsan sapien. Sed at malesuada lacus. Nunc blandit magna vitae tempus mattis. Pellentesque arcu ante.",
+      "From single-family homes to multi-unit developments — quality living spaces designed with structural integrity, premium materials, and timeless aesthetics built to last.",
   },
   {
     n: "02",
-    title: "Quisque et mauris",
+    title: "Commercial & Industrial",
     image: "/assets/house-3.png",
     description:
-      "Donec a purus suscipit, pretium sem eu, imperdiet felis. In hac habitasse platea dictumst. Nunc blandit magna vitae tempus mattis. Pellentesque arcu ante laoreet at ultrices id porttitor.",
+      "Offices, warehouses, and retail developments engineered for performance and durability. We deliver commercial projects that meet the highest standards of function and long-term value.",
   },
   {
     n: "03",
-    title: "Sed tincidunt posuere sem",
+    title: "Public Infrastructure",
     image: "/assets/house-5.png",
     description:
-      "Praesent nec ex eget quam molestie finibus ut faucibus sapien. Aenean ac ligula commodo tellus dapibus iaculis. Aenean porta hendrerit tellus ut dapibus augue viverra et.",
+      "Schools, highways, and public spaces built to serve communities for generations. Institutional construction is among our most meaningful work — and we treat it that way.",
   },
   {
     n: "04",
-    title: "Pellentesque arcu ante",
+    title: "Urban Development",
     image: "/assets/house-7.png",
     description:
-      "Sed at malesuada lacus. Donec a purus suscipit, pretium sem eu, imperdiet felis. Praesent nec ex eget quam molestie finibus ut faucibus sapien aenean ligula commodo.",
+      "Streets, drainage systems, and integrated urban projects engineered with precision to improve the quality of life across growing communities throughout Veracruz.",
   },
 ];
 
@@ -47,13 +47,13 @@ export default function Services() {
             Discover Our Services
           </h2>
           <p className="mt-4 text-base leading-4.5 text-foreground/50">
-            Mauris porttitor vestibulum arcu, sit amet ornare felis.
+            Decade-long expertise across every type of construction.
           </p>
         </div>
         <p className="text-2xl leading-6.5 text-right text-black md:pt-1">
-          Class aptent taciti sociosqu ad litora torquent per conubia nostra,
-          per inceptos himenaeos. Aliquam, augue vitae imperdiet ultricies, quam
-          nulla pretium ipsum.
+          Whether raising a family home or delivering public infrastructure,
+          we bring the same precision and accountability to every project
+          we take on.
         </p>
       </div>
 
