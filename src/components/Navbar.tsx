@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const navLinks: { label: string; href: string }[] = [
   { label: "Home", href: "/" },
@@ -34,8 +35,24 @@ export default function Navbar() {
         visible ? "translate-y-0" : "-translate-y-full"
       }`}
     >
-      <nav className="mx-auto flex max-w-[1760px] items-center justify-between gap-6 px-6 py-6 md:px-10 md:py-8">
-        <ul className="hidden items-center gap-7 text-base md:flex">
+      <nav className="mx-auto flex max-w-[1760px] items-center justify-between gap-6 px-6 py-5 md:px-10 md:py-6">
+        {/* Izquierda — logo */}
+        <div className="flex flex-1 justify-start">
+          <Link href="/" aria-label="OLIVO — Inicio" className="shrink-0">
+            <Image
+              src="/assets/logo-horizontal.png"
+              alt="OLIVO — Estructuras Asfálticas"
+              width={566}
+              height={159}
+              priority
+              draggable={false}
+              className="h-9 w-auto select-none md:h-13"
+            />
+          </Link>
+        </div>
+
+        {/* Centro — links */}
+        <ul className="hidden items-center gap-7 text-base lg:flex">
           {navLinks.map(({ label, href }, i) => (
             <li key={label}>
               <Link
@@ -52,11 +69,8 @@ export default function Navbar() {
           ))}
         </ul>
 
-        <Link href="/" className="text-lg font-medium tracking-[0.25em]">
-          OLIVO
-        </Link>
-
-        <div className="hidden items-center gap-7 text-base md:flex">
+        {/* Derecha — CTAs */}
+        <div className="hidden flex-1 items-center justify-end gap-7 text-base md:flex">
           <Link href="/#contact" className="transition-colors hover:text-foreground/60">
             Contact Us
           </Link>

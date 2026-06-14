@@ -11,6 +11,20 @@ const stats: Stat[] = [
   { prefix: "",  target: 15,  suffix: "+", caption: "Public and institutional contracts awarded to date." },
 ];
 
+// Logos de clientes / colaboradores (placeholder — reemplazar con logos reales)
+const logos: { name: string; className: string }[] = [
+  { name: "redseed", className: "font-medium tracking-tight" },
+  { name: "co//ab.", className: "font-medium italic tracking-tight" },
+  { name: "CONNECT", className: "font-semibold tracking-[0.15em]" },
+  { name: "Norvik", className: "font-medium tracking-tight" },
+  { name: "ATLAS", className: "font-semibold tracking-[0.2em]" },
+  { name: "vértice", className: "font-medium italic tracking-tight" },
+  { name: "MERIDIAN", className: "font-semibold tracking-[0.15em]" },
+  { name: "forma&", className: "font-medium tracking-tight" },
+  { name: "Lumen", className: "font-medium italic tracking-tight" },
+  { name: "GRUPO·SUR", className: "font-semibold tracking-[0.15em]" },
+];
+
 const DURATION = 2400; // ms — todas las animaciones duran lo mismo
 
 // Curva: arranque lento (cubic ease-in hasta t=0.4),
@@ -89,10 +103,14 @@ export default function WhyChooseUs() {
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-8 text-2xl text-foreground/25">
-            <span className="font-medium tracking-tight">redseed</span>
-            <span className="font-medium italic tracking-tight">co//ab.</span>
-            <span className="font-semibold tracking-[0.15em]">CONNECT</span>
+          <div className="relative w-full overflow-hidden mask-[linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
+            <div className="flex w-max animate-marquee items-center text-2xl text-foreground/25">
+              {[...logos, ...logos].map((logo, i) => (
+                <span key={i} className={`shrink-0 px-8 ${logo.className}`}>
+                  {logo.name}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
 
