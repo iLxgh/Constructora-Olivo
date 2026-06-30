@@ -15,18 +15,27 @@ const GAP = 20; // gap-5 = 20px
 export default function PropertyListings() {
   const trackRef = useRef<HTMLDivElement>(null);
   const jumpingRef = useRef(false);
+  const animatingRef = useRef(false);
+  const animRef = useRef<number | null>(null);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const dragRef = useRef({ down: false, startX: 0, startScroll: 0, moved: false });
   const [activeIdx, setActiveIdx] = useState(N);
 
-  const updateActive = useCallback(() => {
+  const metrics = useCallback(() => {
     const track = trackRef.current;
-    if (!track || !track.children[0]) return;
+    if (!track || !track.children[0]) return null;
     const cardEl = track.children[0] as HTMLElement;
     const step = cardEl.offsetWidth + GAP;
     const centerOffset = (track.clientWidth - cardEl.offsetWidth) / 2;
-    const idx = Math.round((track.scrollLeft + centerOffset) / step);
-    setActiveIdx((prev) => (prev === idx ? prev : idx));
+    return { track, step, centerOffset, oneSetW: step * N };
   }, []);
+
+  const updateActive = useCallback(() => {
+    const m = metrics();
+    if (!m) return;
+    const idx = Math.round((m.track.scrollLeft + m.centerOffset) / m.step);
+    setActiveIdx((prev) => (prev === idx ? prev : idx));
+  }, [metrics]);
 
   useEffect(() => {
     const track = trackRef.current;
@@ -38,12 +47,9 @@ export default function PropertyListings() {
   }, [updateActive]);
 
   const doWrap = useCallback(() => {
-    const track = trackRef.current;
-    if (!track || !track.children[0]) return;
-    const cardEl = track.children[0] as HTMLElement;
-    const step = cardEl.offsetWidth + GAP;
-    const centerOffset = (track.clientWidth - cardEl.offsetWidth) / 2;
-    const oneSetW = step * N;
+    const m = metrics();
+    if (!m) return;
+    const { track, step, centerOffset, oneSetW } = m;
 
     const jump = (delta: number) => {
       jumpingRef.current = true;
@@ -63,20 +69,102 @@ export default function PropertyListings() {
     } else if (track.scrollLeft > 2 * oneSetW - centerOffset - step / 2) {
       jump(-oneSetW);
     }
-  }, [updateActive]);
+  }, [metrics, updateActive]);
 
   const onScroll = useCallback(() => {
-    if (jumpingRef.current) return;
+    if (jumpingRef.current || animatingRef.current) return;
     updateActive();
     if (timerRef.current) clearTimeout(timerRef.current);
     timerRef.current = setTimeout(doWrap, 150);
   }, [doWrap, updateActive]);
 
+  // Animación de scroll propia (consistente en Windows y Mac; el snap nativo
+  // interrumpe scrollBy({behavior:"smooth"}) en Chrome/Windows).
+  const animateTo = useCallback(
+    (target: number) => {
+      const track = trackRef.current;
+      if (!track) return;
+      if (animRef.current) cancelAnimationFrame(animRef.current);
+
+      const start = track.scrollLeft;
+      const dist = target - start;
+      if (Math.abs(dist) < 1) return;
+      const duration = 500;
+      const startT = performance.now();
+      const ease = (t: number) => 1 - Math.pow(1 - t, 3); // easeOutCubic
+
+      animatingRef.current = true;
+      track.style.scrollSnapType = "none";
+
+      const step = (now: number) => {
+        const t = Math.min((now - startT) / duration, 1);
+        track.scrollLeft = start + dist * ease(t);
+        updateActive();
+        if (t < 1) {
+          animRef.current = requestAnimationFrame(step);
+        } else {
+          animRef.current = null;
+          animatingRef.current = false;
+          track.style.scrollSnapType = "";
+          doWrap();
+        }
+      };
+      animRef.current = requestAnimationFrame(step);
+    },
+    [doWrap, updateActive]
+  );
+
+  // Desplaza a la tarjeta más cercana al centro
+  const settleToNearest = useCallback(() => {
+    const m = metrics();
+    if (!m) return;
+    const idx = Math.round((m.track.scrollLeft + m.centerOffset) / m.step);
+    animateTo(idx * m.step - m.centerOffset);
+  }, [metrics, animateTo]);
+
   const slide = (dir: 1 | -1) => {
+    const m = metrics();
+    if (!m) return;
+    animateTo(m.track.scrollLeft + m.step * dir);
+  };
+
+  // ── Drag con mouse (solo desktop; touch/trackpad usan el scroll nativo) ──
+  const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (e.pointerType !== "mouse") return;
     const track = trackRef.current;
-    if (!track || !track.children[0]) return;
-    const step = (track.children[0] as HTMLElement).offsetWidth + GAP;
-    track.scrollBy({ left: step * dir, behavior: "smooth" });
+    if (!track) return;
+    if (animRef.current) {
+      cancelAnimationFrame(animRef.current);
+      animRef.current = null;
+      animatingRef.current = false;
+    }
+    dragRef.current = {
+      down: true,
+      startX: e.clientX,
+      startScroll: track.scrollLeft,
+      moved: false,
+    };
+    track.style.scrollSnapType = "none";
+    track.setPointerCapture(e.pointerId);
+  };
+
+  const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    const d = dragRef.current;
+    if (!d.down) return;
+    const track = trackRef.current;
+    if (!track) return;
+    const dx = e.clientX - d.startX;
+    if (Math.abs(dx) > 4) d.moved = true;
+    track.scrollLeft = d.startScroll - dx;
+  };
+
+  const endDrag = (e: React.PointerEvent<HTMLDivElement>) => {
+    const d = dragRef.current;
+    if (!d.down) return;
+    d.down = false;
+    const track = trackRef.current;
+    if (track) track.releasePointerCapture?.(e.pointerId);
+    settleToNearest();
   };
 
   return (
@@ -99,7 +187,11 @@ export default function PropertyListings() {
       <div
         ref={trackRef}
         onScroll={onScroll}
-        className="mt-12 flex gap-5 overflow-x-auto scrollbar-none snap-x snap-mandatory"
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={endDrag}
+        onPointerCancel={endDrag}
+        className="mt-12 flex cursor-grab gap-5 overflow-x-auto scrollbar-none snap-x snap-mandatory select-none active:cursor-grabbing"
       >
         {LOOPED.map((item, i) => {
           const isActive = i === activeIdx;
@@ -107,6 +199,10 @@ export default function PropertyListings() {
             <Link
               key={`${item.slug}-${i}`}
               href={`/work/${item.slug}`}
+              draggable={false}
+              onClickCapture={(e) => {
+                if (dragRef.current.moved) e.preventDefault();
+              }}
               className={`group block shrink-0 snap-center basis-[85%] origin-center transition-transform duration-500 ease-in-out sm:basis-[65%] lg:basis-[55%] ${
                 isActive ? "scale-100" : "scale-[0.78]"
               }`}
@@ -116,6 +212,7 @@ export default function PropertyListings() {
                   src={item.heroImage}
                   alt={item.title}
                   fill
+                  draggable={false}
                   sizes="(max-width: 640px) 85vw, (max-width: 1024px) 65vw, 55vw"
                   className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                 />

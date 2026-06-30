@@ -55,12 +55,13 @@ export default function ContactForm() {
       </div>
 
       <div className="flex flex-col justify-center bg-[#1e1e1b] p-8 text-background md:p-16">
+       <div className="mx-auto w-full max-w-xl">
         <h2 className="text-4xl leading-[1.04] tracking-tight md:text-5xl">
           Have a project in mind?
         </h2>
 
         {status === "success" ? (
-          <div className="mt-10 max-w-xl rounded-sm bg-[#2c2c28] p-8">
+          <div className="mt-10 rounded-sm bg-[#2c2c28] p-8">
             <p className="text-2xl leading-6.5">Message sent ✓</p>
             <p className="mt-3 text-base leading-4.5 text-background/60">
               Thank you for reaching out. Our team will get back to you shortly.
@@ -76,7 +77,7 @@ export default function ContactForm() {
         ) : (
           <form
             onSubmit={handleSubmit}
-            className="mt-10 flex max-w-xl flex-col gap-6"
+            className="mt-10 flex flex-col gap-6"
           >
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
               <Field
@@ -160,6 +161,7 @@ export default function ContactForm() {
             </button>
           </form>
         )}
+       </div>
       </div>
     </section>
   );
