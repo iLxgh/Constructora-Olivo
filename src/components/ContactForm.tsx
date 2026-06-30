@@ -3,11 +3,6 @@
 import { useState } from "react";
 import Image from "next/image";
 
-// Obtén tu access key gratis en https://web3forms.com (se vincula al correo
-// donde quieres recibir los mensajes). Pégala en .env.local como:
-//   NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY=tu-access-key
-const ACCESS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY ?? "";
-
 type Status = "idle" | "loading" | "success" | "error";
 
 export default function ContactForm() {
@@ -17,20 +12,20 @@ export default function ContactForm() {
     e.preventDefault();
     const form = e.currentTarget;
     const data = new FormData(form);
-
-    data.append("access_key", ACCESS_KEY);
-    data.append("from_name", "Constructora OLIVO — Web");
-    // Asunto llamativo y dinámico para que no se pierda en la bandeja
-    data.append(
-      "subject",
-      `🏗️ New Project Inquiry — ${data.get("name") || "Website"}`
-    );
+    const payload = {
+      name: data.get("name"),
+      email: data.get("email"),
+      phone: data.get("phone"),
+      projectType: data.get("projectType"),
+      message: data.get("message"),
+    };
 
     setStatus("loading");
     try {
-      const res = await fetch("https://api.web3forms.com/submit", {
+      const res = await fetch("/api/contact", {
         method: "POST",
-        body: data,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
       });
       const json = await res.json();
       if (json.success) {
@@ -83,15 +78,6 @@ export default function ContactForm() {
             onSubmit={handleSubmit}
             className="mt-10 flex max-w-xl flex-col gap-6"
           >
-            {/* Honeypot anti-spam (oculto) */}
-            <input
-              type="checkbox"
-              name="botcheck"
-              className="hidden"
-              tabIndex={-1}
-              autoComplete="off"
-            />
-
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
               <Field
                 label="Full Name"

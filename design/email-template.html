@@ -1,20 +1,3 @@
-<!--
-  PLANTILLA DE CORREO — Constructora OLIVO
-  ----------------------------------------
-  Esta plantilla es para el correo que RECIBE la constructora cuando alguien
-  llena el formulario de contacto.
-
-  Cómo usarla en Web3Forms:
-    1. Entra a tu panel en https://web3forms.com
-    2. Selecciona tu Access Key → pestaña "Email Template" (o "Customize")
-    3. Pega este HTML. Las variables entre {{llaves}} se llenan solas con
-       los datos del formulario (deben coincidir con los "name" de los inputs:
-       name, email, phone, projectType, message).
-
-  Nota: el ASUNTO del correo ya se define desde el código del formulario
-  (ContactForm.tsx): "🏗️ New Project Inquiry — {nombre}", para que destaque
-  en la bandeja de entrada.
--->
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -23,8 +6,13 @@
     <title>Nueva solicitud de proyecto — OLIVO</title>
   </head>
   <body
-    style="margin: 0; padding: 0; background-color: #f3f1ec; font-family: Arial, Helvetica, sans-serif; color: #1b1b17;"
+    style="margin: 0; padding: 0; background-color: #f3f1ec; font-family: Arial, Helvetica, sans-serif; color: #1b1b17; -webkit-font-smoothing: antialiased;"
   >
+    <!-- Preheader oculto (texto de vista previa en la bandeja) -->
+    <div style="display: none; max-height: 0; overflow: hidden; opacity: 0;">
+      Nueva solicitud de {{name}} — {{projectType}}. Responde cuanto antes.
+    </div>
+
     <table
       role="presentation"
       width="100%"
@@ -40,102 +28,126 @@
             width="100%"
             cellpadding="0"
             cellspacing="0"
-            style="max-width: 600px; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.06);"
+            style="max-width: 600px; background-color: #ffffff; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 8px rgba(27,27,23,0.08);"
           >
+            <!-- Franja de acento -->
+            <tr>
+              <td style="height: 5px; background-color: #2f5d3a; line-height: 5px; font-size: 0;">&nbsp;</td>
+            </tr>
+
             <!-- Encabezado -->
             <tr>
-              <td
-                style="background-color: #1e1e1b; padding: 28px 32px; color: #f3f1ec;"
-              >
-                <p
-                  style="margin: 0; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: #b9b6ac;"
-                >
+              <td style="background-color: #1e1e1b; padding: 36px 32px; color: #f3f1ec; text-align: center;">
+                <table role="presentation" cellpadding="0" cellspacing="0" align="center" style="margin: 0 auto 16px;">
+                  <tr>
+                    <td style="width: 56px; height: 56px; background-color: #2f5d3a; border-radius: 50%; text-align: center; vertical-align: middle; font-size: 26px; line-height: 56px;">
+                      🏗️
+                    </td>
+                  </tr>
+                </table>
+                <p style="margin: 0; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: #9aa893;">
                   Constructora OLIVO
                 </p>
-                <h1
-                  style="margin: 8px 0 0; font-size: 24px; line-height: 1.2; font-weight: 700;"
-                >
-                  🏗️ Nueva solicitud de proyecto
+                <h1 style="margin: 10px 0 0; font-size: 24px; line-height: 1.25; font-weight: 700; color: #ffffff;">
+                  Nueva solicitud de proyecto
                 </h1>
-              </td>
-            </tr>
-
-            <!-- Intro -->
-            <tr>
-              <td style="padding: 28px 32px 8px;">
-                <p style="margin: 0; font-size: 15px; line-height: 1.5; color: #4a4a44;">
-                  Un nuevo cliente potencial llenó el formulario de contacto del
-                  sitio web. Estos son sus datos:
+                <p style="margin: 8px 0 0; font-size: 13px; color: #b9b6ac;">
+                  Recibida el {{fecha}}
                 </p>
               </td>
             </tr>
 
-            <!-- Datos -->
+            <!-- Intro + badge tipo de proyecto -->
             <tr>
-              <td style="padding: 16px 32px 8px;">
-                <table
-                  role="presentation"
-                  width="100%"
-                  cellpadding="0"
-                  cellspacing="0"
-                >
+              <td style="padding: 28px 32px 4px;">
+                <p style="margin: 0 0 16px; font-size: 15px; line-height: 1.55; color: #4a4a44;">
+                  <strong style="color: #1b1b17;">{{name}}</strong> está
+                  interesado en trabajar con ustedes. A continuación están sus
+                  datos de contacto y los detalles de su proyecto.
+                </p>
+                <span style="display: inline-block; background-color: #e7ede3; color: #2f5d3a; font-size: 13px; font-weight: 700; padding: 7px 16px; border-radius: 999px;">
+                  {{projectType}}
+                </span>
+              </td>
+            </tr>
+
+            <!-- Datos de contacto -->
+            <tr>
+              <td style="padding: 24px 32px 4px;">
+                <p style="margin: 0 0 4px; font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: #9a978d;">
+                  Datos de contacto
+                </p>
+                <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
                   <tr>
                     <td style="padding: 12px 0; border-bottom: 1px solid #ece9e2;">
-                      <p style="margin: 0; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #9a978d;">Nombre</p>
-                      <p style="margin: 4px 0 0; font-size: 16px; color: #1b1b17;">{{name}}</p>
+                      <p style="margin: 0; font-size: 13px; color: #9a978d;">Nombre</p>
+                      <p style="margin: 3px 0 0; font-size: 16px; color: #1b1b17;">{{name}}</p>
                     </td>
                   </tr>
                   <tr>
                     <td style="padding: 12px 0; border-bottom: 1px solid #ece9e2;">
-                      <p style="margin: 0; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #9a978d;">Correo</p>
-                      <p style="margin: 4px 0 0; font-size: 16px;">
+                      <p style="margin: 0; font-size: 13px; color: #9a978d;">Correo</p>
+                      <p style="margin: 3px 0 0; font-size: 16px;">
                         <a href="mailto:{{email}}" style="color: #2f5d3a; text-decoration: none;">{{email}}</a>
                       </p>
                     </td>
                   </tr>
                   <tr>
-                    <td style="padding: 12px 0; border-bottom: 1px solid #ece9e2;">
-                      <p style="margin: 0; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #9a978d;">Teléfono</p>
-                      <p style="margin: 4px 0 0; font-size: 16px;">
+                    <td style="padding: 12px 0;">
+                      <p style="margin: 0; font-size: 13px; color: #9a978d;">Teléfono</p>
+                      <p style="margin: 3px 0 0; font-size: 16px;">
                         <a href="tel:{{phone}}" style="color: #2f5d3a; text-decoration: none;">{{phone}}</a>
                       </p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style="padding: 12px 0; border-bottom: 1px solid #ece9e2;">
-                      <p style="margin: 0; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #9a978d;">Tipo de proyecto</p>
-                      <p style="margin: 4px 0 0; font-size: 16px; color: #1b1b17;">{{projectType}}</p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style="padding: 12px 0;">
-                      <p style="margin: 0; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #9a978d;">Mensaje</p>
-                      <p style="margin: 4px 0 0; font-size: 16px; line-height: 1.5; color: #1b1b17;">{{message}}</p>
                     </td>
                   </tr>
                 </table>
               </td>
             </tr>
 
-            <!-- CTA -->
+            <!-- Mensaje -->
             <tr>
-              <td style="padding: 16px 32px 32px;" align="left">
-                <a
-                  href="mailto:{{email}}"
-                  style="display: inline-block; background-color: #1e1e1b; color: #f3f1ec; text-decoration: none; font-size: 14px; padding: 12px 28px; border-radius: 999px;"
-                >
-                  Responder a {{name}}
-                </a>
+              <td style="padding: 24px 32px 8px;">
+                <p style="margin: 0 0 8px; font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: #9a978d;">
+                  Detalle del proyecto
+                </p>
+                <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                  <tr>
+                    <td style="background-color: #f7f5f0; border-left: 3px solid #2f5d3a; border-radius: 6px; padding: 16px 18px;">
+                      <p style="margin: 0; font-size: 16px; line-height: 1.55; color: #1b1b17;">{{message}}</p>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <!-- Botones -->
+            <tr>
+              <td style="padding: 24px 32px 32px;">
+                <table role="presentation" cellpadding="0" cellspacing="0">
+                  <tr>
+                    <td style="padding-right: 10px;">
+                      <a href="mailto:{{email}}" style="display: inline-block; background-color: #1e1e1b; color: #f3f1ec; text-decoration: none; font-size: 14px; font-weight: 600; padding: 12px 26px; border-radius: 999px;">
+                        Responder por correo
+                      </a>
+                    </td>
+                    <td>
+                      <a href="tel:{{phone}}" style="display: inline-block; background-color: #ffffff; color: #1b1b17; text-decoration: none; font-size: 14px; font-weight: 600; padding: 11px 25px; border: 1px solid #d8d5cc; border-radius: 999px;">
+                        Llamar
+                      </a>
+                    </td>
+                  </tr>
+                </table>
               </td>
             </tr>
 
             <!-- Pie -->
             <tr>
-              <td
-                style="background-color: #f3f1ec; padding: 20px 32px; text-align: center;"
-              >
-                <p style="margin: 0; font-size: 12px; color: #9a978d;">
-                  Enviado desde el formulario de contacto de
+              <td style="background-color: #f3f1ec; padding: 22px 32px; text-align: center;">
+                <p style="margin: 0; font-size: 13px; font-weight: 600; color: #4a4a44;">
+                  Estructuras Asfálticas OLIVO S.A. de C.V.
+                </p>
+                <p style="margin: 6px 0 0; font-size: 12px; color: #9a978d;">
+                  Mensaje enviado desde el formulario de contacto de
                   constructoraolivo.com
                 </p>
               </td>
