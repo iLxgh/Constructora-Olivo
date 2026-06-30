@@ -1,6 +1,49 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 
+// Obtén tu access key gratis en https://web3forms.com (se vincula al correo
+// donde quieres recibir los mensajes). Pégala en .env.local como:
+//   NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY=tu-access-key
+const ACCESS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY ?? "";
+
+type Status = "idle" | "loading" | "success" | "error";
+
 export default function ContactForm() {
+  const [status, setStatus] = useState<Status>("idle");
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const data = new FormData(form);
+
+    data.append("access_key", ACCESS_KEY);
+    data.append("from_name", "Constructora OLIVO — Web");
+    // Asunto llamativo y dinámico para que no se pierda en la bandeja
+    data.append(
+      "subject",
+      `🏗️ New Project Inquiry — ${data.get("name") || "Website"}`
+    );
+
+    setStatus("loading");
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: data,
+      });
+      const json = await res.json();
+      if (json.success) {
+        setStatus("success");
+        form.reset();
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
+  };
+
   return (
     <section
       id="contact"
@@ -21,28 +64,116 @@ export default function ContactForm() {
           Have a project in mind?
         </h2>
 
-        <form className="mt-10 flex max-w-xl flex-col gap-6">
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-            <Field label="First Name" placeholder="First Name" />
-            <Field label="Last Name" placeholder="Last Name" />
+        {status === "success" ? (
+          <div className="mt-10 max-w-xl rounded-sm bg-[#2c2c28] p-8">
+            <p className="text-2xl leading-6.5">Message sent ✓</p>
+            <p className="mt-3 text-base leading-4.5 text-background/60">
+              Thank you for reaching out. Our team will get back to you shortly.
+            </p>
+            <button
+              type="button"
+              onClick={() => setStatus("idle")}
+              className="mt-6 w-fit rounded-full bg-background px-8 py-3 text-sm text-foreground transition-opacity hover:opacity-90"
+            >
+              Send another message
+            </button>
           </div>
-          <Field label="I Want To" placeholder="Build a Home" />
-
-          <div className="flex flex-col gap-2">
-            <label className="text-sm text-background/70">Notes</label>
-            <textarea
-              rows={4}
-              className="resize-none rounded-sm bg-[#2c2c28] px-4 py-3 text-sm text-background placeholder:text-background/30 focus:outline-none focus:ring-1 focus:ring-background/30"
-            />
-          </div>
-
-          <button
-            type="button"
-            className="mt-2 w-fit rounded-full bg-background px-8 py-3 text-sm text-foreground transition-opacity hover:opacity-90"
+        ) : (
+          <form
+            onSubmit={handleSubmit}
+            className="mt-10 flex max-w-xl flex-col gap-6"
           >
-            Submit
-          </button>
-        </form>
+            {/* Honeypot anti-spam (oculto) */}
+            <input
+              type="checkbox"
+              name="botcheck"
+              className="hidden"
+              tabIndex={-1}
+              autoComplete="off"
+            />
+
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+              <Field
+                label="Full Name"
+                name="name"
+                placeholder="John Doe"
+                autoComplete="name"
+                required
+              />
+              <Field
+                label="Email"
+                name="email"
+                type="email"
+                placeholder="you@email.com"
+                autoComplete="email"
+                required
+              />
+            </div>
+
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+              <Field
+                label="Phone"
+                name="phone"
+                type="tel"
+                placeholder="+52 (229) 000 0000"
+                autoComplete="tel"
+              />
+              <div className="flex flex-col gap-2">
+                <label htmlFor="projectType" className="text-sm text-background/70">
+                  Project Type
+                </label>
+                <select
+                  id="projectType"
+                  name="projectType"
+                  defaultValue=""
+                  required
+                  className="rounded-sm bg-[#2c2c28] px-4 py-3 text-sm text-background focus:outline-none focus:ring-1 focus:ring-background/30"
+                >
+                  <option value="" disabled>
+                    Select an option
+                  </option>
+                  <option value="Residential">Residential</option>
+                  <option value="Commercial / Industrial">
+                    Commercial / Industrial
+                  </option>
+                  <option value="Public Works">Public Works</option>
+                  <option value="Infrastructure / Roads">
+                    Infrastructure / Roads
+                  </option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <label htmlFor="message" className="text-sm text-background/70">
+                Tell Us About Your Project
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                rows={4}
+                required
+                placeholder="Location, scope, timeline, and any details you'd like us to know."
+                className="resize-none rounded-sm bg-[#2c2c28] px-4 py-3 text-sm text-background placeholder:text-background/30 focus:outline-none focus:ring-1 focus:ring-background/30"
+              />
+            </div>
+
+            {status === "error" && (
+              <p className="text-sm text-red-400">
+                Something went wrong. Please try again or email us directly.
+              </p>
+            )}
+
+            <button
+              type="submit"
+              disabled={status === "loading"}
+              className="mt-2 w-fit rounded-full bg-background px-8 py-3 text-sm text-foreground transition-opacity hover:opacity-90 disabled:opacity-50"
+            >
+              {status === "loading" ? "Sending…" : "Send Message"}
+            </button>
+          </form>
+        )}
       </div>
     </section>
   );
@@ -50,17 +181,31 @@ export default function ContactForm() {
 
 function Field({
   label,
+  name,
   placeholder,
+  type = "text",
+  autoComplete,
+  required,
 }: {
   label: string;
+  name: string;
   placeholder: string;
+  type?: string;
+  autoComplete?: string;
+  required?: boolean;
 }) {
   return (
     <div className="flex flex-col gap-2">
-      <label className="text-sm text-background/70">{label}</label>
+      <label htmlFor={name} className="text-sm text-background/70">
+        {label}
+      </label>
       <input
-        type="text"
+        id={name}
+        name={name}
+        type={type}
         placeholder={placeholder}
+        autoComplete={autoComplete}
+        required={required}
         className="rounded-sm bg-[#2c2c28] px-4 py-3 text-sm text-background placeholder:text-background/30 focus:outline-none focus:ring-1 focus:ring-background/30"
       />
     </div>

@@ -1,0 +1,148 @@
+<!--
+  PLANTILLA DE CORREO — Constructora OLIVO
+  ----------------------------------------
+  Esta plantilla es para el correo que RECIBE la constructora cuando alguien
+  llena el formulario de contacto.
+
+  Cómo usarla en Web3Forms:
+    1. Entra a tu panel en https://web3forms.com
+    2. Selecciona tu Access Key → pestaña "Email Template" (o "Customize")
+    3. Pega este HTML. Las variables entre {{llaves}} se llenan solas con
+       los datos del formulario (deben coincidir con los "name" de los inputs:
+       name, email, phone, projectType, message).
+
+  Nota: el ASUNTO del correo ya se define desde el código del formulario
+  (ContactForm.tsx): "🏗️ New Project Inquiry — {nombre}", para que destaque
+  en la bandeja de entrada.
+-->
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nueva solicitud de proyecto — OLIVO</title>
+  </head>
+  <body
+    style="margin: 0; padding: 0; background-color: #f3f1ec; font-family: Arial, Helvetica, sans-serif; color: #1b1b17;"
+  >
+    <table
+      role="presentation"
+      width="100%"
+      cellpadding="0"
+      cellspacing="0"
+      style="background-color: #f3f1ec; padding: 32px 16px;"
+    >
+      <tr>
+        <td align="center">
+          <!-- Contenedor -->
+          <table
+            role="presentation"
+            width="100%"
+            cellpadding="0"
+            cellspacing="0"
+            style="max-width: 600px; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.06);"
+          >
+            <!-- Encabezado -->
+            <tr>
+              <td
+                style="background-color: #1e1e1b; padding: 28px 32px; color: #f3f1ec;"
+              >
+                <p
+                  style="margin: 0; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: #b9b6ac;"
+                >
+                  Constructora OLIVO
+                </p>
+                <h1
+                  style="margin: 8px 0 0; font-size: 24px; line-height: 1.2; font-weight: 700;"
+                >
+                  🏗️ Nueva solicitud de proyecto
+                </h1>
+              </td>
+            </tr>
+
+            <!-- Intro -->
+            <tr>
+              <td style="padding: 28px 32px 8px;">
+                <p style="margin: 0; font-size: 15px; line-height: 1.5; color: #4a4a44;">
+                  Un nuevo cliente potencial llenó el formulario de contacto del
+                  sitio web. Estos son sus datos:
+                </p>
+              </td>
+            </tr>
+
+            <!-- Datos -->
+            <tr>
+              <td style="padding: 16px 32px 8px;">
+                <table
+                  role="presentation"
+                  width="100%"
+                  cellpadding="0"
+                  cellspacing="0"
+                >
+                  <tr>
+                    <td style="padding: 12px 0; border-bottom: 1px solid #ece9e2;">
+                      <p style="margin: 0; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #9a978d;">Nombre</p>
+                      <p style="margin: 4px 0 0; font-size: 16px; color: #1b1b17;">{{name}}</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 12px 0; border-bottom: 1px solid #ece9e2;">
+                      <p style="margin: 0; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #9a978d;">Correo</p>
+                      <p style="margin: 4px 0 0; font-size: 16px;">
+                        <a href="mailto:{{email}}" style="color: #2f5d3a; text-decoration: none;">{{email}}</a>
+                      </p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 12px 0; border-bottom: 1px solid #ece9e2;">
+                      <p style="margin: 0; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #9a978d;">Teléfono</p>
+                      <p style="margin: 4px 0 0; font-size: 16px;">
+                        <a href="tel:{{phone}}" style="color: #2f5d3a; text-decoration: none;">{{phone}}</a>
+                      </p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 12px 0; border-bottom: 1px solid #ece9e2;">
+                      <p style="margin: 0; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #9a978d;">Tipo de proyecto</p>
+                      <p style="margin: 4px 0 0; font-size: 16px; color: #1b1b17;">{{projectType}}</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 12px 0;">
+                      <p style="margin: 0; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #9a978d;">Mensaje</p>
+                      <p style="margin: 4px 0 0; font-size: 16px; line-height: 1.5; color: #1b1b17;">{{message}}</p>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <!-- CTA -->
+            <tr>
+              <td style="padding: 16px 32px 32px;" align="left">
+                <a
+                  href="mailto:{{email}}"
+                  style="display: inline-block; background-color: #1e1e1b; color: #f3f1ec; text-decoration: none; font-size: 14px; padding: 12px 28px; border-radius: 999px;"
+                >
+                  Responder a {{name}}
+                </a>
+              </td>
+            </tr>
+
+            <!-- Pie -->
+            <tr>
+              <td
+                style="background-color: #f3f1ec; padding: 20px 32px; text-align: center;"
+              >
+                <p style="margin: 0; font-size: 12px; color: #9a978d;">
+                  Enviado desde el formulario de contacto de
+                  constructoraolivo.com
+                </p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
